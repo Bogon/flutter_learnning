@@ -4,13 +4,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5847b51a-56c3-4534-b369-50a5a03e0488" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/english_words.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-    </list>
+    <list default="true" id="5847b51a-56c3-4534-b369-50a5a03e0488" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -213,12 +207,12 @@
       <workItem from="1577156449182" duration="319000" />
       <workItem from="1577156799338" duration="155000" />
       <workItem from="1577156973195" duration="593000" />
-      <workItem from="1577159007220" duration="4791000" />
+      <workItem from="1577159007220" duration="4851000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5858000" />
+    <option name="totallyTimeSpent" value="5918000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -250,7 +244,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32953367" />
       <window_info anchor="bottom" id="Dart Analysis" order="7" weight="0.13989638" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.19481865" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.29533678" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5005325" side_tool="true" weight="0.2" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
