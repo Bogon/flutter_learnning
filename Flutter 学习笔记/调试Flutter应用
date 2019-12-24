@@ -1,0 +1,127 @@
+2.5 **** 调试Flutter应用   https://book.flutterchina.club/chapter2/flutter_app_debug.html
+	1、Dart Observatory (语句级的单步调试和分析器)
+		如果我们使用flutter run启动应用程序，那么当它运行时，我们可以打开Observatory工具的Web页面，例如Observatory默认监听http://127.0.0.1:8100/，可以在浏览器中直接打开该链接。直接使用语句级单步调试器连接到您的应用程序。如果您使用的是IntelliJ，则还可以使用其内置的调试器来调试您的应用程序。
+		Observatory 同时支持分析、检查堆等。有关Observatory的更多信息请参考Observatory 文档。
+		如果您使用Observatory进行分析，请确保通过--profile选项来运行flutter run命令来运行应用程序。 否则，配置文件中将出现的主要问题将是调试断言，以验证框架的各种不变量（请参阅下面的“调试模式断言”）。
+	2、debugger() 声明
+		当使用Dart Observatory（或另一个Dart调试器，例如IntelliJ IDE中的调试器）时，可以使用该debugger()语句插入编程式断点。要使用这个，你必须添加import 'dart:developer';到相关文件顶部。
+		debugger()语句采用一个可选when参数，您可以指定该参数仅在特定条件为真时中断，如下所示：
+
+		void someFunction(double offset) {
+			debugger(when: offset > 30.0);
+			// ...
+		}
+		print、debugPrint、flutter logs
+		Dart print()功能将输出到系统控制台，您可以使用flutter logs来查看它（基本上是一个包装adb logcat）。
+
+		如果你一次输出太多，那么Android有时会丢弃一些日志行。为了避免这种情况，您可以使用Flutter的foundation库中的debugPrint()。 这是一个封装print，它将输出限制在一个级别，避免被Android内核丢弃。
+
+		Flutter框架中的许多类都有toString实现。按照惯例，这些输出通常包括对象的runtimeType单行输出，通常在表单中ClassName(more information about this instance…)。 树中使用的一些类也具有toStringDeep，从该点返回整个子树的多行描述。已一些具有详细信息toString的类会实现一个toStringShort，它只返回对象的类型或其他非常简短的（一个或两个单词）描述。
+
+	3、调试模式断言
+		在Flutter应用调试过程中，Dart assert语句被启用，并且Flutter框架使用它来执行许多运行时检查来验证是否违反一些不可变的规则。
+
+		当一个不可变的规则被违反时，它被报告给控制台，并带有一些上下文信息来帮助追踪问题的根源。
+
+		要关闭调试模式并使用发布模式，请使用flutter run --release运行您的应用程序。 这也关闭了Observatory调试器。一个中间模式可以关闭除Observatory之外所有调试辅助工具的，称为“profile mode”，用--profile替代--release即可。
+
+	4、调试应用程序层： debugDumpApp();
+		Flutter框架的每一层都提供了将其当前状态或事件转储(dump)到控制台（使用debugPrint）的功能。
+
+		Widget 树
+		要转储Widgets树的状态，请调用debugDumpApp()。 只要应用程序已经构建了至少一次（即在调用build()之后的任何时间），您可以在应用程序未处于构建阶段（即，不在build()方法内调用 ）的任何时间调用此方法（在调用runApp()之后）。
+
+		如, 这个应用程序:
+
+		import 'package:flutter/material.dart';
+
+		void main() {
+			runApp(
+				new MaterialApp(
+					home: new AppHome(),
+				),
+			);
+		}
+
+		class AppHome extends StatelessWidget {
+			@override
+			Widget build(BuildContext context) {
+				return new Material(
+					child: new Center(
+						child: new FlatButton(
+							onPressed: () {
+								debugDumpApp();
+							},
+							child: new Text('Dump App'),
+						),
+					),
+				);
+			}
+		}
+		…会输出这样的内容（精确的细节会根据框架的版本、设备的大小等等而变化）：
+
+		I/flutter ( 6559): WidgetsFlutterBinding - CHECKED MODE
+		I/flutter ( 6559): RenderObjectToWidgetAdapter<RenderBox>([GlobalObjectKey RenderView(497039273)]; renderObject: RenderView)
+		I/flutter ( 6559): └MaterialApp(state: _MaterialAppState(1009803148))
+		I/flutter ( 6559):  └ScrollConfiguration()
+		I/flutter ( 6559):   └AnimatedTheme(duration: 200ms; state: _AnimatedThemeState(543295893; ticker inactive; ThemeDataTween(ThemeData(Brightness.light Color(0xff2196f3) etc...) → null)))
+		I/flutter ( 6559):    └Theme(ThemeData(Brightness.light Color(0xff2196f3) etc...))
+
+		... #省略剩余内容
+		这是一个“扁平化”的树，显示了通过各种构建函数投影的所有widget（如果你在widget树的根中调用toStringDeepwidget，这是你获得的树）。 你会看到很多在你的应用源代码中没有出现的widget，因为它们是被框架中widget的build()函数插入的。例如，InkFeature是Material widget的一个实现细节 。
+		当按钮从被按下变为被释放时debugDumpApp()被调用，FlatButton对象同时调用setState()，并将自己标记为"dirty"。 这就是为什么如果你看转储，你会看到特定的对象标记为“dirty”。您还可以查看已注册了哪些手势监听器; 在这种情况下，一个单一的GestureDetector被列出，并且监听“tap”手势（“tap”是TapGestureDetector的toStringShort函数输出的）
+
+		如果您编写自己的widget，则可以通过覆盖debugFillProperties()来添加信息。 将DiagnosticsProperty对象作为方法参数，并调用父类方法。 该函数是该toString方法用来填充小部件描述信息的。
+		
+	5、渲染树
+		如果您尝试调试布局问题，那么Widget树可能不够详细。在这种情况下，您可以通过调用debugDumpRenderTree()转储渲染树。 正如debugDumpApp()，除布局或绘制阶段外，您可以随时调用此函数。作为一般规则，从frame 回调 或事件处理器中调用它是最佳解决方案。
+
+		要调用debugDumpRenderTree()，您需要添加import'package:flutter/rendering.dart';到您的源文件。
+
+		上面这个小例子的输出结果如下所示：
+
+		I/flutter ( 6559): RenderView
+		I/flutter ( 6559):  │ debug mode enabled - android
+		I/flutter ( 6559):  │ window size: Size(1080.0, 1794.0) (in physical pixels)
+		I/flutter ( 6559):  │ device pixel ratio: 2.625 (physical pixels per logical pixel)
+		I/flutter ( 6559):  │ configuration: Size(411.4, 683.4) at 2.625x (in logical pixels)
+		I/flutter ( 6559):  │
+		I/flutter ( 6559):  └─child: RenderCustomPaint
+		I/flutter ( 6559):    │ creator: CustomPaint ← Banner ← CheckedModeBanner ←
+		I/flutter ( 6559):    │   WidgetsApp-[GlobalObjectKey _MaterialAppState(1009803148)] ←
+		I/flutter ( 6559):    │   Theme ← AnimatedTheme ← ScrollConfiguration ← MaterialApp ←
+		I/flutter ( 6559):    │   [root]
+		I/flutter ( 6559):    │ parentData: <none>
+		I/flutter ( 6559):    │ constraints: BoxConstraints(w=411.4, h=683.4)
+		I/flutter ( 6559):    │ size: Size(411.4, 683.4)
+		... # 省略
+		这是根RenderObject对象的toStringDeep函数的输出。
+
+		当调试布局问题时，关键要看的是size和constraints字段。约束沿着树向下传递，尺寸向上传递。
+
+		如果您编写自己的渲染对象，则可以通过覆盖debugFillProperties()将信息添加到转储。 将DiagnosticsProperty对象作为方法的参数，并调用父类方法。
+		
+	6、Layer树
+		读者可以理解为渲染树是可以分层的，而最终绘制需要将不同的层合成起来，而Layer则是绘制时需要合成的层，如果您尝试调试合成问题，则可以使用debugDumpLayerTree()。对于上面的例子，它会输出：
+
+		I/flutter : TransformLayer
+		I/flutter :  │ creator: [root]
+		I/flutter :  │ offset: Offset(0.0, 0.0)
+		I/flutter :  │ transform:
+		I/flutter :  │   [0] 3.5,0.0,0.0,0.0
+		I/flutter :  │   [1] 0.0,3.5,0.0,0.0
+		I/flutter :  │   [2] 0.0,0.0,1.0,0.0
+		I/flutter :  │   [3] 0.0,0.0,0.0,1.0
+		I/flutter :  │
+		I/flutter :  ├─child 1: OffsetLayer
+		I/flutter :  │ │ creator: RepaintBoundary ← _FocusScope ← Semantics ← Focus-[GlobalObjectKey MaterialPageRoute(560156430)] ← _ModalScope-[GlobalKey 328026813] ← _OverlayEntry-[GlobalKey 388965355] ← Stack ← Overlay-[GlobalKey 625702218] ← Navigator-[GlobalObjectKey _MaterialAppState(859106034)] ← Title ← ⋯
+		I/flutter :  │ │ offset: Offset(0.0, 0.0)
+		I/flutter :  │ │
+		I/flutter :  │ └─child 1: PictureLayer
+		I/flutter :  │
+		I/flutter :  └─child 2: PictureLayer
+		这是根Layer的toStringDeep输出的。
+
+		根部的变换是应用设备像素比的变换; 在这种情况下，每个逻辑像素代表3.5个设备像素。
+
+		RepaintBoundary widget在渲染树的层中创建了一个RenderRepaintBoundary。这用于减少需要重绘的需求量。

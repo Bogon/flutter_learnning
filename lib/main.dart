@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'english_words.dart';
 
 void main() => runApp(MyApp());
 
@@ -175,11 +176,14 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text("在路由表中接收参数传递"),
               textColor: Colors.blue,
               onPressed: () {
+                debugDumpApp();
                 //导航到新路由
                 Navigator.of(context).pushNamed("tip2", arguments: "hello world tip2");
               },
             ),
 
+            /// 生成随机的英文字符串
+            RandomWordsWidget(),
 
           ],
         ),
