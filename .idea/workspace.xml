@@ -5,16 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd1c30eb-eb43-473c-8f04-dd0f33df50e8" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/Component.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/Text.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/debug/debug.iml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/debug/debug.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/profile/profile.iml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/profile/profile.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_learnning.iml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_learnning.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Counter.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Counter.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,11 +29,6 @@
         <option value="Dart File" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>onGenerateRoute</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -77,7 +65,7 @@
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
-  <component name="RunManager" selected="Android App.FutterDemo">
+  <component name="RunManager" selected="Flutter.main.dart">
     <configuration name="FutterDemo" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="main" />
       <option name="DEPLOY" value="true" />
@@ -194,7 +182,7 @@
       <workItem from="1581390411758" duration="11000" />
       <workItem from="1581390750100" duration="264000" />
       <workItem from="1581391072245" duration="416000" />
-      <workItem from="1581392063672" duration="6388000" />
+      <workItem from="1581392063672" duration="14269000" />
     </task>
     <servers />
   </component>
@@ -210,22 +198,22 @@
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="231" y="23" width="894" height="777" key="CommitChangelistDialog2/0.23.1280.777@0.23.1280.777" timestamp="1581422142447" />
-    <state width="616" height="196" key="GridCell.Tab.0.bottom" timestamp="1581422048348">
+    <state width="1238" height="155" key="GridCell.Tab.0.bottom" timestamp="1581423975356">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="616" height="196" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1581422048348" />
-    <state width="616" height="196" key="GridCell.Tab.0.center" timestamp="1581422048347">
+    <state width="1238" height="155" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1581423975356" />
+    <state width="1238" height="155" key="GridCell.Tab.0.center" timestamp="1581423975355">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="616" height="196" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1581422048347" />
-    <state width="616" height="196" key="GridCell.Tab.0.left" timestamp="1581422048346">
+    <state width="1238" height="155" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1581423975355" />
+    <state width="1238" height="155" key="GridCell.Tab.0.left" timestamp="1581423975355">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="616" height="196" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1581422048346" />
-    <state width="616" height="196" key="GridCell.Tab.0.right" timestamp="1581422048347">
+    <state width="1238" height="155" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1581423975355" />
+    <state width="1238" height="155" key="GridCell.Tab.0.right" timestamp="1581423975356">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
-    <state width="616" height="196" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1581422048347" />
+    <state width="1238" height="155" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1581423975356" />
     <state x="141" y="23" key="SettingsEditor" timestamp="1581402399903">
       <screen x="0" y="23" width="1280" height="777" />
     </state>

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'english_words.dart';
 import 'Counter.dart';
+import 'Text.dart';
+import 'Component.dart';
 
 void main() => runApp(MyApp());
 
@@ -34,6 +36,16 @@ class MyApp extends StatelessWidget {
           return TipRoute(text: ModalRoute.of(context).settings.arguments);},
         "counter": (context) {
           return CounterWidget();
+        },
+
+        /// 文本组件使用
+        "text": (context) {
+          return TextWidget();
+        },
+
+        /// 组件使用
+        "component": (context) {
+          return ComponentPage(title: "所有组件",);
         },
 
       } ,
@@ -197,6 +209,29 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.of(context).pushNamed("counter", arguments: "0");
               },
             ),
+
+            /// 展示文本组件的使用范例
+            FlatButton(
+              child: Text("文本组件"),
+              textColor: Colors.blue,
+              onPressed: () {
+                debugDumpApp();
+                //导航到新路由
+                Navigator.of(context).pushNamed("text");
+              },
+            ),
+
+            /// 展示所有组件的使用范例
+            FlatButton(
+              child: Text("所有组件的使用范例"),
+              textColor: Colors.blue,
+              onPressed: () {
+                debugDumpApp();
+                //导航到新路由
+                Navigator.of(context).pushNamed("component");
+              },
+            ),
+
 
             /// 生成随机的英文字符串
             RandomWordsWidget(),
