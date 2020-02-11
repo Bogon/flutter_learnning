@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'english_words.dart';
+import 'Counter.dart';
 
 void main() => runApp(MyApp());
 
@@ -30,6 +31,9 @@ class MyApp extends StatelessWidget {
         "transParams_page":(context) => EchoRoute(),
         "tip2": (context){
           return TipRoute(text: ModalRoute.of(context).settings.arguments);},
+        "counter": (context) {
+          return CounterWidget();
+        },
 
       } ,
 
@@ -179,6 +183,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 debugDumpApp();
                 //导航到新路由
                 Navigator.of(context).pushNamed("tip2", arguments: "hello world tip2");
+              },
+            ),
+
+            /// 自建计数器
+            FlatButton(
+              child: Text("自建计数器"),
+              textColor: Colors.blue,
+              onPressed: () {
+                debugDumpApp();
+                //导航到新路由
+                Navigator.of(context).pushNamed("counter", arguments: "0");
               },
             ),
 
